@@ -1,36 +1,48 @@
+<div align="center">
 
-# Template TypeScript Boilerplate
+# 🚀 TypeScript FullStack Boilerplate
 
-Plantilla base para proyectos modernos con **TypeScript + React + Vite**, lista para desarrollo local y despliegue dockerizado. Incluye una pequeña API en Node/Express, integración con Tailwind, componentes shadcn/ui y soporte para modo oscuro.
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com)
 
-## ¿Qué incluye?
+</div>
 
-- Frontend: Vite + React + TypeScript, TailwindCSS, componentes shadcn (`Frontend/src/components/ui`), `ThemeProvider` y `ModeToggle`.
-- Backend: Node + Express con un endpoint base `/api` (respuesta JSON simple) listo para ampliarse.
-- Infraestructura: `docker-compose` con servicios para backend, frontend y `nginx` como proxy reverso.
+A structured full-stack web application boilerplate built with TypeScript. It features a decoupled architecture with React and Vite on the frontend, Node.js and Express on the backend, and Nginx acting as a reverse proxy. Fully dockerized, structured, and production-ready.
 
-## Estructura del repositorio
+## 🚀 Initial Setup
 
-- `Backend/` — servidor Node/Express.
-- `Frontend/` — app React (Vite + TypeScript).
-- `Infrastructure/` — `docker-compose.yml`, `.env` y configuración de `nginx`.
+### 1. Configure Environment Variables
 
-## Arrancar con Docker
+**Frontend:**
+```bash
+cp Frontend/.env.example Frontend/.env
+```
 
-1. Ajusta `Infrastructure/.env` si deseas cambiar puertos o nombres.
-2. Levanta los servicios:
+**Backend:**
+```bash
+cp Backend/.env.example Backend/.env
+```
+
+---
+
+## 🐳 Running the Containers
 
 ```bash
 cd Infrastructure
 docker compose up --build -d
 ```
 
-- Frontend (desarrollo Vite): `http://localhost:5173`.
-- Frontend (servido por nginx): `http://localhost:${NGINX_PORT:-85}`.
-- Backend: se ejecuta internamente en `3000` y queda accesible vía `nginx` en `/api`.
+---
 
-Comprobar endpoint de salud:
+## 🌐 Service Endpoints
 
-```bash
-curl -s http://localhost:${NGINX_PORT:-85}/api
-```
+| Service | URL | Purpose |
+|---------|-----|---------|
+| 🎨 Frontend (Dev) | http://localhost:5173 | Development server with HMR |
+| 🎨 Frontend (Prod) | http://localhost:85 | Production build served by Nginx |
+| 🔌 API Backend | http://localhost:85/api | API Endpoints |
