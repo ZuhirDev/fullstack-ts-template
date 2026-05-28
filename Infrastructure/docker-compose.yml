@@ -1,0 +1,48 @@
+
+services:
+  backend:
+    build:
+      context: ${NODE}
+      dockerfile: Dockerfile
+      target: dev
+    container_name: ${CONTAINER_NAME_NODE}
+    volumes:
+      - ${NODE}/:/app
+      - backend_node_modules:/app/node_modules
+    networks:
+      - backend-network
+
+  frontend:
+    build:
+      context: ${REACT}
+      dockerfile: Dockerfile
+      target: dev
+    container_name: ${CONTAINER_NAME_REACT}
+    ports:
+      - "5173:5173"
+    volumes:
+      - ${REACT}/:/app
+      - frontend_node_modules:/app/node_modules
+    networks:
+      - backend-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: ${CONTAINER_NAME_NGINX}
+    ports:
+      - "${NGINX_PORT}:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ${REACT}/dist:/var/www/frontend/dist
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - backend-network
+
+volumes:
+  backend_node_modules:
+  frontend_node_modules:
+networks: 
+  backend-network:
+    driver: bridge
